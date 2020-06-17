@@ -3,8 +3,8 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.14.0'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'rc-test.fmadata.com'
+set :repo_url, 'git@github.com:brianlong/rc-test.git'
 set :user, 'deploy'
 
 # Default branch is :master
@@ -12,7 +12,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/deploy/#{fetch(:application)}"
+set :deploy_to, "/var/www/#{fetch(:application)}"
 
 set :migration_role, :app
 set :templated_config_files, []
@@ -30,8 +30,8 @@ set :templated_config_files, []
 
 # Default value for :linked_files is []
 append :linked_files, 'config/database.yml'
-append :linked_files, 'config/master.key'
-append :linked_files, 'config/credentials.yml.enc'
+append :linked_files, 'config/credentials/production.key'
+# append :linked_files, 'config/credentials.yml.enc'
 append :linked_files, 'config/sidekiq.yml'
 
 # Default value for linked_dirs is []
