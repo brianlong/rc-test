@@ -40,11 +40,11 @@ append :linked_files, 'config/sidekiq.yml'
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
        'public/system'
 
-set :bundle_dir, '/home/deploy/gems'
-set :default_env, {
-  'GEM_HOME' => '/home/deploy/gems',
-  'GEM_PATH' => '/home/deploy/gems'
-}
+# set :bundle_dir, '/home/deploy/gems'
+# set :default_env, {
+#   'GEM_HOME' => '/home/deploy/gems',
+#   'GEM_PATH' => '/home/deploy/gems'
+# }
 
 set :passenger_environment_variables,
     { path: '/usr/sbin/passenger-status:$PATH' }
