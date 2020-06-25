@@ -50,36 +50,36 @@ set :passenger_environment_variables,
 # set :passenger_restart_with_touch, true
 
 # SIDEKIQ CONFIG
-set :sidekiq_role, :app
-set :sidekiq_config, File.join(current_path, 'config', 'sidekiq.yml').to_s
-
-namespace :sidekiq do
-  desc 'Stop sidekiq (graceful shutdown, put unfinished tasks back to Redis)'
-  task :stop do
-    on roles :all do |_role|
-      execute :systemctl, '--user', 'stop', :sidekiq
-    end
-  end
-
-  desc 'Start sidekiq'
-  task :start do
-    on roles :all do |_role|
-      execute :systemctl, '--user', 'start', :sidekiq
-    end
-  end
-
-  desc 'Restart sidekiq'
-  task :restart do
-    on roles(:all), in: :sequence, wait: 5 do
-      execute :systemctl, '--user', 'restart', :sidekiq
-    end
-  end
-end
-
-namespace :deploy do
-  after :finishing, 'deploy:restart', 'deploy:cleanup'
-  after :restart, 'sidekiq:restart'
-end
+# set :sidekiq_role, :app
+# set :sidekiq_config, File.join(current_path, 'config', 'sidekiq.yml').to_s
+#
+# namespace :sidekiq do
+#   desc 'Stop sidekiq (graceful shutdown, put unfinished tasks back to Redis)'
+#   task :stop do
+#     on roles :all do |_role|
+#       execute :systemctl, '--user', 'stop', :sidekiq
+#     end
+#   end
+#
+#   desc 'Start sidekiq'
+#   task :start do
+#     on roles :all do |_role|
+#       execute :systemctl, '--user', 'start', :sidekiq
+#     end
+#   end
+#
+#   desc 'Restart sidekiq'
+#   task :restart do
+#     on roles(:all), in: :sequence, wait: 5 do
+#       execute :systemctl, '--user', 'restart', :sidekiq
+#     end
+#   end
+# end
+#
+# namespace :deploy do
+#   after :finishing, 'deploy:restart', 'deploy:cleanup'
+#   after :restart, 'sidekiq:restart'
+# end
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
